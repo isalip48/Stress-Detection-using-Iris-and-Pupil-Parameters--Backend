@@ -3,7 +3,7 @@ import { getDb } from "../configs/db.config.js";
 // Submit stress analysis result
 export const submitAnalysis = async (req, res) => {
   try {
-    const { username, hasStress, imageUrl } = req.body;
+    const { username, hasStress, imageUrl, pupilDilation, tensionRings } = req.body;
 
     // Validate request
     if (!username || hasStress === undefined) {
@@ -41,8 +41,8 @@ export const submitAnalysis = async (req, res) => {
       imageUrl: imageUrl || null,
       confidenceLevel: req.body.confidenceLevel ?? null,
 
-      pupilDilation: req.body.pupilDilation ?? null,
-      tensionRings: req.body.tensionRings ?? null,
+      pupilDilation: pupilDilation ?? null,
+      tensionRings: tensionRings ?? null,
 
       // Store the full Flask analysis JSON
       fullDetails: req.body.fullDetails ?? null,
@@ -60,6 +60,8 @@ export const submitAnalysis = async (req, res) => {
         username: newAnalysis.username,
         hasStress: newAnalysis.hasStress,
         imageUrl: newAnalysis.imageUrl,
+        pupilDilation: newAnalysis.pupilDilation,
+        tensionRings: newAnalysis.tensionRings,
         createdAt: newAnalysis.createdAt,
       },
     });
